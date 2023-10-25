@@ -4,7 +4,7 @@ describe('Advanced Xpath test cases', async () =>{
      * 1. Launch https://www.accuweather.com/ 
      * 2. Verify current-temp is in between 45 and 55
      */
-    it.only('Verify current temp is less than or equals to feel-like temp', async () =>{
+    it('Verify current temp is less than or equals to feel-like temp', async () =>{
         //1. Launch https://www.accuweather.com/ 
         await browser.url('https://www.accuweather.com/');
 
@@ -18,7 +18,7 @@ describe('Advanced Xpath test cases', async () =>{
 
     })
 
-    it('Verify error on empty login flow', async () => {
+    it.only('Verify error on empty login flow', async () => {
         /**
          * 1. Launch https:www.facebook.com/
          * 2. Click 'Log In' button
@@ -34,6 +34,8 @@ describe('Advanced Xpath test cases', async () =>{
 
         //3. Verify error msg is displayed
         const loginErrorMessageElement = await $('//div[text()="The email or mobile number you entered isn’t connected to an account. "]');
+        const loginErrorMessageIsDisplayed = await loginErrorMessageElement.isDisplayed();
+        expect(loginErrorMessageIsDisplayed,"Login error message is not displayed").to.be.true;
 
     })
 })
