@@ -38,7 +38,7 @@ describe('Advanced Xpath test cases', async () =>{
         expect(loginErrorMessageIsDisplayed,"Login error message is not displayed").to.be.true;
 
     })
-    it.only('Verify the empty messenger login flow', async () => {
+    it('Verify the empty messenger login flow', async () => {
         /**
          * 1. Launch https:www.facebook.com/
          * 2. Click on 'Messenger' link
