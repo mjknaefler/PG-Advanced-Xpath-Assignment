@@ -1,5 +1,5 @@
 const { expect } = require("chai");
-describe('Advanced Xpath test cases', async () =>{
+describe('Advanced Xpath test cases', () =>{
     /**
      * 1. Launch https://www.accuweather.com/ 
      * 2. Verify current-temp is in between 45 and 55
@@ -7,13 +7,13 @@ describe('Advanced Xpath test cases', async () =>{
     it('Verify current temp is less than or equals to feel-like temp', async () =>{
         //1. Launch https://www.accuweather.com/ 
         await browser.url('https://www.accuweather.com/');
-
+        await browser.pause(3000);
         //2. Verify current-temp is in between 45 and 55
         const currentLocationTemperatureElement = await $('//span[@class="recent-location-temp"]');
         const currentLocationTemperatureFahrenheit = await currentLocationTemperatureElement.getText();
         const currentLocationTemperatureMeasurement = await currentLocationTemperatureFahrenheit.slice(0,2);
-        const verifyWeather = (currentLocationTemperatureMeasurement >= 45 && currentLocationTemperatureMeasurement <= 55);   
-        expect(verifyWeather,`Current location weather is not between 45 and 55 fahrenheit, current weather is ${currentLocationTemperatureMeasurement}`).to.be.true;
+        const verifyWeather = (await currentLocationTemperatureMeasurement >= 45 && await currentLocationTemperatureMeasurement <= 55);   
+        expect (verifyWeather,`Current location weather is not between 45 and 55 fahrenheit, current weather is ${currentLocationTemperatureMeasurement}`).to.be.true;
 
 
     })
@@ -26,7 +26,7 @@ describe('Advanced Xpath test cases', async () =>{
          */
 
         //1. Launch https:www.facebook.com/
-        await browser.url('https:www.facebook.com/');
+        await browser.url('https://www.facebook.com/');
 
         //2. Click 'Log In' button
         const loginButtonElement = await $('//button[@name="login"]');
@@ -66,7 +66,8 @@ describe('Advanced Xpath test cases', async () =>{
         
 
         //4. Click 'Log In' button
-        const loginButtonElement = await $('//button[@id="loginbutton"]');
+        const loginButtonElement = await $('//button[text()="Log in"]');
+        await browser.pause(2000);
         await loginButtonElement.click();
         
         //5. Verify link -> "Find your account and log in" is displayed
